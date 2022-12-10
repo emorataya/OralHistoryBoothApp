@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using OralHistoryBoothApp.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,13 @@ namespace OralHistoryBoothApp
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        Recordingpage recordingpage;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Recordingpage));
+
         }
     }
 }
