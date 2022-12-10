@@ -27,7 +27,7 @@ namespace OralHistoryBoothApp
         {
             this.InitializeComponent();
         }
-        Recordingpage recordingpage;
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,13 +27,26 @@ namespace OralHistoryBoothApp.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// //https://www.c-sharpcorner.com/UploadFile/2b876a/audio-recorder-in-windows-10-universal-windows-platform/
     public sealed partial class Recordingpage : Page
     {
         MediaCapture capture;
         InMemoryRandomAccessStream buffer;
         bool record;
+        string audioFile = "";
         string filename;
-        string audioFile = ".MP3";
+        // private InMemoryRandomAccessStream _memoryBuffer;
+        // private string _fileName = "newAudio";
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public Recordingpage()
         {
             this.InitializeComponent();
@@ -95,6 +109,9 @@ namespace OralHistoryBoothApp.Views
             }
             await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
+                audioFile = RandomString(10);
+                audioFile += ".mp3";
+
                 StorageFile storageFile = await storageFolder.CreateFileAsync(audioFile, CreationCollisionOption.GenerateUniqueName);
                 filename = storageFile.Name;
                 using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -131,11 +148,29 @@ namespace OralHistoryBoothApp.Views
         {
             await capture.StopRecordAsync();
             record = false;
+            //SaveAudioToFile();
         }
 
-        private async void playBtn_Click(object sender, RoutedEventArgs e)
+        private async void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             await PlayRecordedAudio(Dispatcher);
         }
+
+        //private async void SaveAudioToFile()
+        //{
+        //    IRandomAccessStream audioStream = buffer.CloneStream();
+        //    StorageFolder storageFolder = Package.Current.InstalledLocation;
+        //    StorageFile storageFile = await storageFolder.CreateFileAsync(
+        //      "prueba", CreationCollisionOption.GenerateUniqueName);
+        //    this._fileName = storageFile.Name;
+        //    using (IRandomAccessStream fileStream =
+        //      await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+        //    {
+        //        await RandomAccessStream.CopyAndCloseAsync(
+        //          audioStream.GetInputStreamAt(0), fileStream.GetOutputStreamAt(0));
+        //        await audioStream.FlushAsync();
+        //        audioStream.Dispose();
+        //    }
+        //}
     }
 }
