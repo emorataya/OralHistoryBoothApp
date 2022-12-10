@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
         Margin="10" FontWeight="Bold" Text="Tell us about yourself." HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name= " Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name: " Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"  />
         <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Text="{x:Bind Recording.Name, Mode=TwoWay}" />
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Did you attend HU?" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <TextBox Grid.Row="2" Grid.Column="1" Margin="10" />
@@ -30,7 +30,7 @@
         <TextBox Grid.Row="3" Grid.Column="1" Margin="10" />
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" Content="Submit" Click="Button_Click" />
 
-        <ListView x:Name="movieListView" Height="155" Width="200" HorizontalAlignment="Left"
+        <!--<ListView x:Name="movieListView" Height="155" Width="200" HorizontalAlignment="Left"
                           ItemsSource="{x:Bind adminViewModel.AdminInfo, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:RecordingViewModel">
@@ -39,6 +39,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
     </Grid>
 </Page>

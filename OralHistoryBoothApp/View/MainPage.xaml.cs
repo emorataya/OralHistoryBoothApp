@@ -40,9 +40,9 @@ namespace OralHistoryBoothApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(typeof(Recordingpage));
+            this.Frame.Navigate(typeof(Recordingpage));
 
-            adminViewModel.AdminInfo.Add(new RecordingViewModel { Name = Recording.Name });
+            //adminViewModel.AdminInfo.Add(new RecordingViewModel { Name = Recording.Name });
 
         }
     }

@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="OralHistoryBoothApp.View.TermsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryBoothApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Grid>
+        <Image Source="/large.jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"/>
+        <StackPanel>
+            <TextBlock Text="Harding University 100th anniversary" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Bernard MT Condensed" />
+            <TextBlock Text="Oral History Booth" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Bernard MT Condensed" />
+            <TextBlock Text="" FontSize="200"/>
+            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
+                <TextBlock Text="Terms and Conditions"  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left"/>
+            </Border>
+            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
+                <TextBlock Text="- I acknowledge that this is a research project from the History Department and they can use this information for their purposes."  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left" />
+            </Border>
+            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
+                <TextBlock Text="- I acknowledge that the content is appropriate and that my information will be uploaded to the Booth."  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left"/>
+            </Border>
+            <TextBlock Text="" FontSize="25"/>
+            <CheckBox x:Name="TermsCheckBox" Content="I have read and agree to the Terms and Conditions." Margin="200,0,0,0" FontSize="15" HorizontalAlignment="Left"/>
+            <Button HorizontalAlignment="Right" Margin="0,0,300,0" Content="Continue" FontSize="24" Background="Black"/>
+        </StackPanel>
+    </Grid>
+</Page>
