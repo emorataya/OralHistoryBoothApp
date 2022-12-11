@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using static System.Net.Mime.MediaTypeNames;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -27,8 +28,8 @@ namespace OralHistoryBoothApp
     {
         private AdminViewModel adminViewModel { get; set; }
         private RecordingViewModel Recording { get; set; }
-       
 
+       
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,7 +37,6 @@ namespace OralHistoryBoothApp
             Recording = new RecordingViewModel();
             adminViewModel = new AdminViewModel();
         }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -35,6 +35,12 @@ namespace OralHistoryBoothApp.Views
         bool record;
         string audioFile = "";
         string filename;
+
+        //timer
+        private DispatcherTimer timer;
+        private int time = 600;
+
+
         // private InMemoryRandomAccessStream _memoryBuffer;
         // private string _fileName = "newAudio";
 
@@ -50,6 +56,36 @@ namespace OralHistoryBoothApp.Views
         public Recordingpage()
         {
             this.InitializeComponent();
+
+            //timer
+           this.NavigationCacheMode = NavigationCacheMode.Required;
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Tick += timer_Tick;
+            //timer.Start();
+        }
+
+        void timer_Tick(object sender, object e)
+        {
+            if (time > 1)
+            {
+                time--;
+                txt.Text = String.Format("00:0{0}:{1}", time / 60, time % 60);
+            }
+            else
+            {
+                timer.Stop();
+            }
+
+        }
+
+         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            button.IsEnabled = false;
+            txt.Text = "You have 10 minutes";
+            timer.Start();
+
         }
 
         private async Task<bool> RecordProcess()
@@ -142,10 +178,13 @@ namespace OralHistoryBoothApp.Views
                 record = true;
             }
 
+            Button_Click(sender, e);
+
         }
 
         private async void stopBtn_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             await capture.StopRecordAsync();
             record = false;
             //SaveAudioToFile();
