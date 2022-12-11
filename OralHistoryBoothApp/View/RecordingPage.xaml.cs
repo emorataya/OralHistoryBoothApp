@@ -35,7 +35,7 @@ namespace OralHistoryBoothApp.Views
         bool record;
         string audioFile = "";
         string filename;
-
+        string fullpath;
         //timer
         private DispatcherTimer timer;
         private int time = 0;
@@ -134,7 +134,8 @@ namespace OralHistoryBoothApp.Views
 
             if (audio == null)
                 throw new ArgumentNullException("buffer");
-            StorageFolder storageFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            //Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             if (!string.IsNullOrEmpty(filename))
             {
                 StorageFile original = await storageFolder.GetFileAsync(filename);
@@ -147,6 +148,9 @@ namespace OralHistoryBoothApp.Views
 
                 StorageFile storageFile = await storageFolder.CreateFileAsync(audioFile, CreationCollisionOption.GenerateUniqueName);
                 filename = storageFile.Name;
+
+                fullpath = storageFile.Path;
+
                 using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     await RandomAccessStream.CopyAndCloseAsync(audio.GetInputStreamAt(0), fileStream.GetOutputStreamAt(0));
@@ -155,9 +159,16 @@ namespace OralHistoryBoothApp.Views
                 }
                 IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
                 playback.SetSource(stream, storageFile.FileType);
+
+                //Prueba de TagLib
+
                 playback.Play();
+
+             
+               
             });
         }
+
         private async void recordBtn_Click(object sender, RoutedEventArgs e)
         {
             time = 600;
@@ -230,6 +241,13 @@ namespace OralHistoryBoothApp.Views
             pauseBtn.IsEnabled = false;
             timer.Stop();
             record = false;
+        }
+
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TagLib.File file = TagLib.File.Create(fullpath);
+            file.Tag.Album = "Karen Angelica Carballo Chavez";
+            file.Save();
         }
 
 

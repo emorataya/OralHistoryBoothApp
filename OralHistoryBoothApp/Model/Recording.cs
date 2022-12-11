@@ -13,8 +13,8 @@ namespace OralHistoryBoothApp.Model
         internal Action<object, PropertyChangedEventArgs> PropertyChanged;
 
         public string Name { get; set; }
-        //public int Decade { get; set; }
-        //public string Tag { get; set; }
-        //public bool Student { get; set; }
+        public int Decade { get; set; }
+        public string Tag { get; set; }
+        public bool Student { get; set; }
     }
 }

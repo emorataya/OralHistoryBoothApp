@@ -10,6 +10,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Center" FontSize="48" x:Name="TimerIndicator" VerticalAlignment="Top" Margin="0,0,0,0"/>
+        <Button Name="SubmitBtn"  HorizontalAlignment="Center" FontSize="48"  VerticalAlignment="Top" Click="SubmitBtn_Click">Submit</Button>
 
         <AppBar IsOpen="True" IsSticky="True" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -45,8 +46,7 @@
                 </AppBarButton>
 
             </StackPanel>
-
+            
         </AppBar>
-
     </Grid>
 </Page>
