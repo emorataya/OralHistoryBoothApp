@@ -24,8 +24,9 @@
                 <TextBlock Text="- I acknowledge that the content is appropriate and that my information will be uploaded to the Booth."  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left"/>
             </Border>
             <TextBlock Text="" FontSize="25"/>
-            <CheckBox x:Name="TermsCheckBox" Content="I have read and agree to the Terms and Conditions." Margin="200,0,0,0" FontSize="15" HorizontalAlignment="Left"/>
-            <Button HorizontalAlignment="Right" Margin="0,0,300,0" Content="Continue" FontSize="24" Background="Black"/>
+            <CheckBox x:Name="TermsCheckBox" Content="I have read and agree to the Terms and Conditions." Margin="200,0,0,0" FontSize="15" HorizontalAlignment="Left" IsChecked="False"/>
+            <TextBlock x:Name="TermsUncheckedError" Text="Please agree to the terms above"  FontSize="20" FontFamily="Bernard MT Condensed" Margin="0,0,150,0" HorizontalAlignment="Right" Visibility="Collapsed" Foreground="Yellow"/>
+            <Button HorizontalAlignment="Right" Margin="0,0,100,0" Content="Continue" FontSize="24" Background="Black" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Page>

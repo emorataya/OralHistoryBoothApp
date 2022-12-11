@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using OralHistoryBoothApp.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,18 @@ namespace OralHistoryBoothApp.View
         public TermsPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (TermsCheckBox.IsChecked == false)
+            {
+                TermsUncheckedError.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(MainPage));
+            }
         }
     }
 }
