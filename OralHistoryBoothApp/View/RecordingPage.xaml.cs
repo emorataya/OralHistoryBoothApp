@@ -85,7 +85,6 @@ namespace OralHistoryBoothApp.Views
             button.IsEnabled = false;
             txt.Text = "You have 10 minutes";
             timer.Start();
-
         }
 
         private async Task<bool> RecordProcess()
@@ -119,6 +118,7 @@ namespace OralHistoryBoothApp.Views
                     record = false;
                     throw new Exception(string.Format("Code: {0}. {1}", errorEventArgs.Code, errorEventArgs.Message));
                 };
+
             }
             catch (Exception ex)
             {
@@ -179,9 +179,7 @@ namespace OralHistoryBoothApp.Views
             }
 
             Button_Click(sender, e);
-
         }
-
         private async void stopBtn_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
@@ -194,6 +192,20 @@ namespace OralHistoryBoothApp.Views
         {
             await PlayRecordedAudio(Dispatcher);
         }
+
+        private async void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            await capture.PauseRecordAsync(0);
+        }
+
+        private async void ResumeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            timer.Start();
+            await capture.ResumeRecordAsync();
+        }
+
 
         //private async void SaveAudioToFile()
         //{
