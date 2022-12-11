@@ -9,15 +9,44 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <AppBar IsOpen="True" IsSticky="True">
-            <StackPanel Orientation="Horizontal">
-                <AppBarButton x:Name="recordBtn" Label="Record" Icon="Microphone" Click="recordBtn_Click"></AppBarButton>
-                <AppBarButton x:Name="stopBtn" Label="Stop" Icon="Stop" Click="stopBtn_Click"></AppBarButton>
-                <AppBarButton x:Name="playBtn" Label="Play" Icon="Play" Click="PlayBtn_Click"></AppBarButton>
-                <AppBarButton x:Name="pauseBtn" Label="Pause" Icon="Pause" Click="PauseBtn_Click"></AppBarButton>
-                <AppBarButton x:Name="resumeBtn" Label="Resume" Icon="Refresh" Click="ResumeBtn_Click" ></AppBarButton>
+        <TextBlock HorizontalAlignment="Center" FontSize="48" x:Name="TimerIndicator" VerticalAlignment="Top" Margin="0,0,0,0"/>
+
+        <AppBar IsOpen="True" IsSticky="True" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <AppBarButton x:Name="recordBtn" Label="Record" Icon="Microphone" Click="recordBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="stopBtn" Label="Stop" Icon="Stop" Click="stopBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="playBtn" Label="Play" Icon="Play" Click="PlayBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="pauseBtn" Label="Pause" Icon="Pause" Click="PauseBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="resumeBtn" Label="Resume" Icon="Refresh" Click="ResumeBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="cancelBtn" Label="Cancel" Icon="Cancel" Click="CancelBtn_Click" Width="50" Height="100" Margin="40,0,20,0">
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+
             </StackPanel>
+
         </AppBar>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" x:Name="txt"/>
+
     </Grid>
 </Page>

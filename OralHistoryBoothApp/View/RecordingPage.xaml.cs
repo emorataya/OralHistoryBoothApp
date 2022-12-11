@@ -38,7 +38,7 @@ namespace OralHistoryBoothApp.Views
 
         //timer
         private DispatcherTimer timer;
-        private int time = 600;
+        private int time = 0;
 
 
         // private InMemoryRandomAccessStream _memoryBuffer;
@@ -67,6 +67,7 @@ namespace OralHistoryBoothApp.Views
             playBtn.IsEnabled = false;
             pauseBtn.IsEnabled = false;
             resumeBtn.IsEnabled = false;
+            cancelBtn.IsEnabled = false;
         }
 
         void timer_Tick(object sender, object e)
@@ -74,21 +75,13 @@ namespace OralHistoryBoothApp.Views
             if (time > 1)
             {
                 time--;
-                txt.Text = String.Format("00:0{0}:{1}", time / 60, time % 60);
+                TimerIndicator.Text = String.Format("00:0{0}:{1}", time / 60, time % 60);
             }
             else
             {
                 timer.Stop();
             }
 
-        }
-
-         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            button.IsEnabled = false;
-            txt.Text = "You have 10 minutes";
-            timer.Start();
         }
 
         private async Task<bool> RecordProcess()
@@ -167,14 +160,14 @@ namespace OralHistoryBoothApp.Views
         }
         private async void recordBtn_Click(object sender, RoutedEventArgs e)
         {
+            time = 600;
+
             if (record)
             {
                 //already recored process  
             }
             else
-            {
-                stopBtn.IsEnabled = true;
-                pauseBtn.IsEnabled = true;
+            { 
                 await RecordProcess();
                 await capture.StartRecordToStreamAsync(MediaEncodingProfile.CreateMp3(AudioEncodingQuality.Auto), buffer);
                 if (record)
@@ -184,13 +177,23 @@ namespace OralHistoryBoothApp.Views
                 record = true;
             }
 
-            Button_Click(sender, e);
+            TimerIndicator.Text = "You have 10 minutes";
+            timer.Start();
+            recordBtn.IsEnabled = false;
+            stopBtn.IsEnabled = true;
+            pauseBtn.IsEnabled = true;
+            cancelBtn.IsEnabled = true;
+
         }
         private async void stopBtn_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
             await capture.StopRecordAsync();
             record = false;
+            playBtn.IsEnabled = true;
+            stopBtn.IsEnabled = false;
+            resumeBtn.IsEnabled = false;
+            pauseBtn.IsEnabled = false;
             //SaveAudioToFile();
         }
 
@@ -203,12 +206,30 @@ namespace OralHistoryBoothApp.Views
         {
             timer.Stop();
             await capture.PauseRecordAsync(0);
+            pauseBtn.IsEnabled = false;
+            resumeBtn.IsEnabled = true;
         }
 
         private async void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
             await capture.ResumeRecordAsync();
+            pauseBtn.IsEnabled = true;
+            resumeBtn.IsEnabled = false;
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //buffer.Dispose();
+            buffer = null;
+            recordBtn.IsEnabled = true;
+            stopBtn.IsEnabled = false;
+            playBtn.IsEnabled = false;
+            resumeBtn.IsEnabled = false;
+            cancelBtn.IsEnabled = false;
+            pauseBtn.IsEnabled = false;
+            timer.Stop();
+            record = false;
         }
 
 
