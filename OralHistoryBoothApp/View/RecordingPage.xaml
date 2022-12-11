@@ -15,11 +15,9 @@
                 <AppBarButton x:Name="stopBtn" Label="Stop" Icon="Stop" Click="stopBtn_Click"></AppBarButton>
                 <AppBarButton x:Name="playBtn" Label="Play" Icon="Play" Click="PlayBtn_Click"></AppBarButton>
                 <AppBarButton x:Name="pauseBtn" Label="Pause" Icon="Pause" Click="PauseBtn_Click"></AppBarButton>
-                <AppBarButton x:Name="resumeBtn" Label="Resume" Icon="Play" Click="ResumeBtn_Click" ></AppBarButton>
+                <AppBarButton x:Name="resumeBtn" Label="Resume" Icon="Refresh" Click="ResumeBtn_Click" ></AppBarButton>
             </StackPanel>
         </AppBar>
-
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" x:Name="txt"/>
-        <Button Grid.Row="1" Content="start" Click="Button_Click" x:Name="button"/>
     </Grid>
 </Page>

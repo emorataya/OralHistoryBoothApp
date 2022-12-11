@@ -63,6 +63,10 @@ namespace OralHistoryBoothApp.Views
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += timer_Tick;
             //timer.Start();
+            stopBtn.IsEnabled = false;
+            playBtn.IsEnabled = false;
+            pauseBtn.IsEnabled = false;
+            resumeBtn.IsEnabled = false;
         }
 
         void timer_Tick(object sender, object e)
@@ -169,6 +173,8 @@ namespace OralHistoryBoothApp.Views
             }
             else
             {
+                stopBtn.IsEnabled = true;
+                pauseBtn.IsEnabled = true;
                 await RecordProcess();
                 await capture.StartRecordToStreamAsync(MediaEncodingProfile.CreateMp3(AudioEncodingQuality.Auto), buffer);
                 if (record)
@@ -201,7 +207,6 @@ namespace OralHistoryBoothApp.Views
 
         private async void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             timer.Start();
             await capture.ResumeRecordAsync();
         }
