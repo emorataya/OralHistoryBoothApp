@@ -213,6 +213,7 @@ namespace OralHistoryBoothApp.Views
                 record = true;
             }
 
+            TimerIndicator.Visibility = Visibility.Visible;
             TimerIndicator.Text = "You have 10 minutes";
             timer.Start();
             recordBtn.IsEnabled = false;
@@ -266,6 +267,7 @@ namespace OralHistoryBoothApp.Views
             pauseBtn.IsEnabled = false;
             timer.Stop();
             record = false;
+            TimerIndicator.Visibility = Visibility.Collapsed;
         }
 
 
