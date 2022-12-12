@@ -36,13 +36,14 @@ namespace OralHistoryBoothApp.Views
         string audioFile = "";
         string filename;
         string fullpath;
+        bool isYesChecked = false;
+        bool isNoChecked = false;
+        bool nameTyped = false;
+        bool storyClicked = false;
+        bool decadeCLicked = false;
         //timer
         private DispatcherTimer timer;
         private int time = 0;
-
-
-        // private InMemoryRandomAccessStream _memoryBuffer;
-        // private string _fileName = "newAudio";
 
         private static Random random = new Random();
 
@@ -68,6 +69,7 @@ namespace OralHistoryBoothApp.Views
             pauseBtn.IsEnabled = false;
             resumeBtn.IsEnabled = false;
             cancelBtn.IsEnabled = false;
+            SubmitBtn.IsEnabled = false;
         }
 
         private async void timer_Tick(object sender, object e)
@@ -138,7 +140,19 @@ namespace OralHistoryBoothApp.Views
         }
         public async Task PlayRecordedAudio(CoreDispatcher UiDispatcher)
         {
+
+            //await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            //{
+            //    MediaElement playbackMediaElement = new MediaElement();
+            //    StorageFolder storageFolder2 = Windows.Storage.ApplicationData.Current.LocalFolder;
+            //    StorageFile storageFile = await storageFolder2.GetFileAsync(filename);
+            //    IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
+            //    playbackMediaElement.SetSource(stream, storageFile.FileType);
+            //    playbackMediaElement.Play();
+            //});
+
             MediaElement playback = new MediaElement();
+            //
             IRandomAccessStream audio = buffer.CloneStream();
 
             if (audio == null)
@@ -166,6 +180,8 @@ namespace OralHistoryBoothApp.Views
                     await audio.FlushAsync();
                     audio.Dispose();
                 }
+
+                //
                 IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
                 playback.SetSource(stream, storageFile.FileType);
 
@@ -173,8 +189,8 @@ namespace OralHistoryBoothApp.Views
 
                 playback.Play();
 
-             
-               
+
+
             });
         }
 
@@ -252,7 +268,8 @@ namespace OralHistoryBoothApp.Views
             record = false;
         }
 
-        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+
+        private void addTags()
         {
             TagLib.File file = TagLib.File.Create(fullpath);
             file.Tag.Title = "Name: " + NameTextBox.Text;
@@ -264,8 +281,95 @@ namespace OralHistoryBoothApp.Views
             string StorySelected = StoryTags.SelectedItem.ToString();
             file.Tag.Copyright = StorySelected;
             file.Save();
+        }
+
+        private async void SaveAudio(CoreDispatcher UiDispatcher)
+        {
+
+            IRandomAccessStream audio = buffer.CloneStream();
+
+            if (audio == null)
+                throw new ArgumentNullException("buffer");
+            //Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (!string.IsNullOrEmpty(filename))
+            {
+                StorageFile original = await storageFolder.GetFileAsync(filename);
+                await original.DeleteAsync();
+            }
+            await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                audioFile = RandomString(10);
+                audioFile += ".mp3";
+
+                StorageFile storageFile = await storageFolder.CreateFileAsync(audioFile, CreationCollisionOption.GenerateUniqueName);
+                filename = storageFile.Name;
+
+                fullpath = storageFile.Path;
+
+                using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    await RandomAccessStream.CopyAndCloseAsync(audio.GetInputStreamAt(0), fileStream.GetOutputStreamAt(0));
+                    await audio.FlushAsync();
+                    audio.Dispose();
+                }
+            });
+        }
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+     
+            //SaveAudio(Dispatcher);
+            addTags();
 
 
+        }
+
+        private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            nameTyped = true;
+            if (NameTextBox.Text.Length == 0)
+            {
+                SubmitBtn.IsEnabled = false;
+                nameTyped = false;
+            }
+            else if(storyClicked == true && decadeCLicked == true && (isNoChecked == true || isYesChecked == true))
+            {
+                SubmitBtn.IsEnabled = true;
+                
+            }
+        }
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            isYesChecked = true;
+            if (storyClicked == true && decadeCLicked == true && nameTyped == true)
+            { SubmitBtn.IsEnabled = true; }
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            isNoChecked = true;
+            if (storyClicked == true && decadeCLicked == true && nameTyped == true)
+            { SubmitBtn.IsEnabled = true; }
+        }
+
+        private void Decades_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            decadeCLicked = true;
+            if (storyClicked == true && nameTyped == true && (isNoChecked == true || isYesChecked == true))
+            {
+                SubmitBtn.IsEnabled = true;
+            }
+
+        }
+
+        private void StoryTags_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            storyClicked = true;
+            if (decadeCLicked = true && nameTyped == true && (isNoChecked == true || isYesChecked == true))
+            {
+                SubmitBtn.IsEnabled = true;
+            }
         }
 
 
