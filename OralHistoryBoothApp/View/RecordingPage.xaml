@@ -34,19 +34,19 @@
        
         <RadioButton x:Name="YesButton"  Grid.Row="2" GroupName="YesandNo" Content="Yes" Width="50" MinWidth="50" Height="32" Margin="159,0,0,0" />
         <RadioButton x:Name="NoButton"  Grid.Row="2" Grid.Column="1"  GroupName="YesandNo" Content="No" Width="50" MinWidth="50" Height="32" Margin="1,0,0,0" />
-        <!--<TextBox Grid.Row="2" Grid.Column="1" Margin="10" />-->
+       
         <TextBlock Grid.Row="3" Text="What decade is this story from?" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="194" />
         <ComboBox Name="Decades" PlaceholderText="Pick a Decade" Grid.Row="3" Grid.Column="1" Margin="10,0,0,0" Height="32" VerticalAlignment="Center" Width="130" >
             <x:String>1960</x:String>
-            <!--<x:Int32>1970</x:Int32>
-            <x:Int32>1980</x:Int32>
-            <x:Int32>1990</x:Int32>
-            <x:Int32>2000</x:Int32>
-            <x:Int32>2010</x:Int32>
-            <x:Int32>2020</x:Int32>-->
+            <x:String>1970</x:String>
+            <x:String>1980</x:String>
+            <x:String>1990</x:String>
+            <x:String>2000</x:String>
+            <x:String>2010</x:String>
+            <x:String>2020</x:String>
         </ComboBox>
-        <TextBlock Grid.Row="4" Text="What is this story about?" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="194" />
 
+        <TextBlock Grid.Row="4" Text="What is this story about?" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="194" />
         <ComboBox Name="StoryTags" PlaceholderText="Pick a tag" Grid.Row="4" Grid.Column="1" Margin="10,0,0,0" Height="32" VerticalAlignment="Center" Width="130" >
             <x:String>Dorm Life</x:String>
             <x:String>Chapel</x:String>

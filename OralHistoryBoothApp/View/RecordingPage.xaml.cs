@@ -70,9 +70,9 @@ namespace OralHistoryBoothApp.Views
             cancelBtn.IsEnabled = false;
         }
 
-        void timer_Tick(object sender, object e)
+        private async void timer_Tick(object sender, object e)
         {
-            if (time > 1)
+            if (time > 0)
             {
                 time--;
                 TimerIndicator.Text = String.Format("00:0{0}:{1}", time / 60, time % 60);
@@ -80,6 +80,14 @@ namespace OralHistoryBoothApp.Views
             else
             {
                 timer.Stop();
+               await capture.StopRecordAsync();
+                record = false;
+                playBtn.IsEnabled = true;
+                stopBtn.IsEnabled = false;
+                resumeBtn.IsEnabled = false;
+                pauseBtn.IsEnabled = false;
+                cancelBtn.IsEnabled = true;
+
             }
 
         }
@@ -106,7 +114,7 @@ namespace OralHistoryBoothApp.Views
                 capture.RecordLimitationExceeded += (MediaCapture sender) =>
                 {
                     //Stop  
-                    // await capture.StopRecordAsync();  
+                    //await capture.StopRecordAsync();  
                     record = false;
                     throw new Exception("Record Limitation Exceeded ");
                 };
@@ -125,6 +133,7 @@ namespace OralHistoryBoothApp.Views
                 }
                 throw;
             }
+          
             return true;
         }
         public async Task PlayRecordedAudio(CoreDispatcher UiDispatcher)
