@@ -246,8 +246,17 @@ namespace OralHistoryBoothApp.Views
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             TagLib.File file = TagLib.File.Create(fullpath);
-            file.Tag.Album = "Karen Angelica Carballo Chavez";
+            file.Tag.Title = "Name: " + NameTextBox.Text;
+            if (YesButton.IsChecked == true)
+                file.Tag.Subtitle = "Student";
+            else { file.Tag.Subtitle = "Not a student"; }
+            string DecadeSelected = Decades.SelectedItem.ToString();
+            file.Tag.Album = DecadeSelected;
+            string StorySelected = StoryTags.SelectedItem.ToString();
+            file.Tag.Copyright = StorySelected;
             file.Save();
+
+
         }
 
 
