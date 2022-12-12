@@ -126,6 +126,9 @@
     <Compile Include="Model\RecordingsInfo.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\RecordingViewModel.cs" />
+    <Compile Include="View\AdminLogInPage.xaml.cs">
+      <DependentUpon>AdminLogInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RecordingPage.xaml.cs">
       <DependentUpon>RecordingPage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="LogInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminLogInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

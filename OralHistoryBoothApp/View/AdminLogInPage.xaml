@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="OralHistoryBoothApp.View.AdminLogInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryBoothApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="username" Text="Enter username:"  FontSize="18" Height="30"/>
+            <TextBox x:Name="usernameInput" PlaceholderText="Username" FontSize="18"  Height="38" Margin="0,0,0,0"/>
+
+            <RelativePanel Name="myRelPanel" Height="82">
+                <TextBlock Name="passwordLabel" Text="Password"  FontSize="18" />
+                <PasswordBox Name="passwordBox" RelativePanel.Below="passwordLabel"  Height="35" Width="200" />
+                <TextBlock x:Name="requiredPassword" Text="Must be at least 8 characters." Foreground="Red" 
+               RelativePanel.Below="passwordBox" RelativePanel.AlignLeftWith="passwordBox" />
+            </RelativePanel>
+            <Button Name="AdminLogIn" HorizontalAlignment="Center" Click="AdminLogIn_Click"> Log In</Button>
+        </StackPanel>
+    </Grid>
+</Page>
