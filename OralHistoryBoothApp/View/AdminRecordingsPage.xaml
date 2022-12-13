@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListView x:Name="MP3ListView" />
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ListView x:Name="MP3ListView" SelectionChanged="MP3ListView_SelectionChanged" />
+            <Button Name="DeleteSelectedBtn" Click="DeleteSelectedBtn_Click"> Delete </Button>
+        </StackPanel>
     </Grid>
 </Page>

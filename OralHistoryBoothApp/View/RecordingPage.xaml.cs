@@ -268,6 +268,8 @@ namespace OralHistoryBoothApp.Views
             timer.Stop();
             record = false;
             TimerIndicator.Visibility = Visibility.Collapsed;
+
+            
         }
 
 
@@ -287,7 +289,6 @@ namespace OralHistoryBoothApp.Views
 
         private async void SaveAudio(CoreDispatcher UiDispatcher)
         {
-
             IRandomAccessStream audio = buffer.CloneStream();
 
             if (audio == null)
