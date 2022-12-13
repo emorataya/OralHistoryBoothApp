@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,16 @@ namespace OralHistoryBoothApp.View
         public AdminRecordingsPage()
         {
             this.InitializeComponent();
+
+            // Get the MP3 files in the "Music" folder.
+            string[] mp3Files = Directory.GetFiles("C:\\Users\\fabri\\AppData\\Local\\Packages\\373b416a-eb2b-495f-8916-344e0f68b79a_p3exjxwffkpjw\\LocalState", "*.mp3");
+
+            // Add the MP3 files to the ListView.
+            foreach (string mp3File in mp3Files)
+            {
+                MP3ListView.Items.Add(mp3File);
+            }
         }
     }
+
 }

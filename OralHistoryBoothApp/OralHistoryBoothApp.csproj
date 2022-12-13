@@ -129,6 +129,9 @@
     <Compile Include="View\AdminLogInPage.xaml.cs">
       <DependentUpon>AdminLogInPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AdminRecordingsPage.xaml.cs">
+      <DependentUpon>AdminRecordingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RecordingPage.xaml.cs">
       <DependentUpon>RecordingPage.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdminLogInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminRecordingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
