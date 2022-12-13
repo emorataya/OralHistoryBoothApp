@@ -36,7 +36,7 @@ namespace OralHistoryBoothApp.View
             }
             else
             {
-                this.Frame.Navigate(typeof(MainPage));
+                this.Frame.Navigate(typeof(Recordingpage));
             }
         }
     }

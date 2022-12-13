@@ -38,7 +38,7 @@ namespace OralHistoryBoothApp.View
             if(usernameInput.Text == "admin" && passwordBox.Password == "1234")
             {
                 //AdminLogIn.IsEnabled = true;
-                this.Frame.Navigate(typeof(MainPage));
+                this.Frame.Navigate(typeof(AdminRecordingsPage));
 
             }
 
