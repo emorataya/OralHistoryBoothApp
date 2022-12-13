@@ -45,7 +45,8 @@ namespace OralHistoryBoothApp.View
             }
         }
 
-        private void MP3ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private async void MP3ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Get the index of the selected item
             int selectedIndex = MP3ListView.SelectedIndex;
@@ -59,13 +60,24 @@ namespace OralHistoryBoothApp.View
                 // Convert the item to a string
                 string selectedItemString = selectedItem.ToString();
 
-                // Set the source of the MediaPlayer to the selected MP3 file
-                player.Source = MediaSource.CreateFromUri(new Uri(selectedItemString));
+                // Create a StorageFile instance for the selected file
+                StorageFile file = await StorageFile.GetFileFromPathAsync(selectedItemString);
 
-                // Play the MP3 file
-                player.Play();
+                MusicProperties properties = await file.Properties.GetMusicPropertiesAsync();
+
+                // Get the metadata from the MusicProperties
+                string Name = properties.Title;
+                string isStudent = properties.Subtitle;
+                string decade = properties.Album;
+               // string storyTag = properties.;
+
+
+                // Create a string to represent the metadata
+                string metadata = $"Name: {Name} \nStudent Attendance: {isStudent} \nDecade of recording: {decade}";
+
+                DisplayTagsText.Text = metadata;
+
             }
-
         }
 
         private async void DeleteSelectedBtn_Click(object sender, RoutedEventArgs e)
@@ -90,6 +102,28 @@ namespace OralHistoryBoothApp.View
 
                 // Delete the file
                 await file.DeleteAsync();
+            }
+        }
+
+        private void PlayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the index of the selected item
+            int selectedIndex = MP3ListView.SelectedIndex;
+
+            // Make sure a valid index was selected
+            if (selectedIndex >= 0 && selectedIndex < MP3ListView.Items.Count)
+            {
+                // Get the selected item using the index
+                object selectedItem = MP3ListView.Items[selectedIndex];
+
+                // Convert the item to a string
+                string selectedItemString = selectedItem.ToString();
+
+                // Set the source of the MediaPlayer to the selected MP3 file
+                player.Source = MediaSource.CreateFromUri(new Uri(selectedItemString));
+
+                // Play the MP3 file
+                player.Play();
             }
         }
     }

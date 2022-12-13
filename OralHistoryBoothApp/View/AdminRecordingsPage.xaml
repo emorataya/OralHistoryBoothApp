@@ -12,6 +12,9 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ListView x:Name="MP3ListView" SelectionChanged="MP3ListView_SelectionChanged" />
             <Button Name="DeleteSelectedBtn" Click="DeleteSelectedBtn_Click"> Delete </Button>
+            <Button Name="PlayBtn" HorizontalAlignment="Center" Click="PlayBtn_Click">Play</Button>
+            <TextBlock FontSize="60" Name="DisplayTagsText"> </TextBlock>
+
         </StackPanel>
     </Grid>
 </Page>
