@@ -12,7 +12,7 @@
         <Image Source="/HardingLogo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1000"/>
         <TextBlock Text="Login" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" TextAlignment="Center" Foreground="white" />
         <Button Name="GuestBtn" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="60" FontSize="30" Click="GuestBtn_Click" Margin="0,40,0,0" Background="#FF000008"> Guest </Button>
-            <Button Name="AdminBtn" CornerRadius="10"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="60" FontSize="30" Click="AdminBtn_Click" Margin="0,50,0,0" Background="#FF000008">Admin</Button>
+        <Button Name="AdminBtn" CornerRadius="10"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="60" FontSize="30" Click="AdminBtn_Click" Margin="0,50,0,0" Background="#FF000008">Admin</Button>
         </StackPanel>
     </Grid>
 </Page>

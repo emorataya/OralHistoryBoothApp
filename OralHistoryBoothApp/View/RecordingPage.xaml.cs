@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
@@ -13,12 +9,11 @@ using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.ApplicationModel;
+using Windows.UI.Xaml.Media.Animation;
+using TagLib.Ogg;
+using Frame = Windows.UI.Xaml.Controls.Frame;
+using Page = Windows.UI.Xaml.Controls.Page;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -41,6 +36,7 @@ namespace OralHistoryBoothApp.Views
         bool nameTyped = false;
         bool storyClicked = false;
         bool decadeCLicked = false;
+        bool stopAudioClick = false;
         //timer
         private DispatcherTimer timer;
         private int time = 0;
@@ -149,6 +145,8 @@ namespace OralHistoryBoothApp.Views
         }
         public async Task SaveRecordedAudio(CoreDispatcher UiDispatcher)
         {
+   
+
             MediaElement playback = new MediaElement();
             //
             IRandomAccessStream audio = buffer.CloneStream();
@@ -217,6 +215,7 @@ namespace OralHistoryBoothApp.Views
             stopBtn.IsEnabled = false;
             resumeBtn.IsEnabled = false;
             pauseBtn.IsEnabled = false;
+            stopAudioClick = true;
         }
 
         private async void PlayBtn_Click(object sender, RoutedEventArgs e)
@@ -252,12 +251,14 @@ namespace OralHistoryBoothApp.Views
             timer.Stop();
             record = false;
             TimerIndicator.Visibility = Visibility.Collapsed;
+            SubmitBtn.IsEnabled = false;
+            stopAudioClick = false;
         }
 
         private void addTags()
         {
             TagLib.File file = TagLib.File.Create(fullpath);
-            file.Tag.Title = "Name: " + NameTextBox.Text;
+            file.Tag.Title = NameTextBox.Text;
             if (YesButton.IsChecked == true)
                 file.Tag.Subtitle = "Student";
             else { file.Tag.Subtitle = "Not a student"; }
@@ -268,9 +269,31 @@ namespace OralHistoryBoothApp.Views
             file.Save();
         }
 
-        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        private async void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             addTags();
+
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Recording saved",
+                Content = "Your recording has been saved!",
+                PrimaryButtonText = "Record again",
+                SecondaryButtonText = "Exit"
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                var frame = new Frame();
+                Window.Current.Content = frame;
+
+                // Navigate to the desired page and clear any previous state
+                frame.Navigate(typeof(Recordingpage), null, new SuppressNavigationTransitionInfo());
+            }
+            else if (result == ContentDialogResult.Secondary)
+            {
+                this.Frame.Navigate(typeof(LoginPage));
+            }
         }
 
         private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -281,7 +304,7 @@ namespace OralHistoryBoothApp.Views
                 SubmitBtn.IsEnabled = false;
                 nameTyped = false;
             }
-            else if(storyClicked == true && decadeCLicked == true && (isNoChecked == true || isYesChecked == true))
+            else if(storyClicked == true && decadeCLicked == true && stopAudioClick == true && (isNoChecked == true || isYesChecked == true))
             {
                 SubmitBtn.IsEnabled = true;
                 
@@ -291,21 +314,21 @@ namespace OralHistoryBoothApp.Views
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
             isYesChecked = true;
-            if (storyClicked == true && decadeCLicked == true && nameTyped == true)
+            if (storyClicked == true && decadeCLicked == true && stopAudioClick == true && nameTyped == true )
             { SubmitBtn.IsEnabled = true; }
         }
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             isNoChecked = true;
-            if (storyClicked == true && decadeCLicked == true && nameTyped == true)
+            if (storyClicked == true && decadeCLicked == true && stopAudioClick == true && nameTyped == true)
             { SubmitBtn.IsEnabled = true; }
         }
 
         private void Decades_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             decadeCLicked = true;
-            if (storyClicked == true && nameTyped == true && (isNoChecked == true || isYesChecked == true))
+            if (storyClicked == true && nameTyped == true && stopAudioClick == true && (isNoChecked == true || isYesChecked == true))
             {
                 SubmitBtn.IsEnabled = true;
             }
@@ -315,7 +338,7 @@ namespace OralHistoryBoothApp.Views
         private void StoryTags_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             storyClicked = true;
-            if (decadeCLicked = true && nameTyped == true && (isNoChecked == true || isYesChecked == true))
+            if (decadeCLicked = true && nameTyped == true && stopAudioClick == true &&  (isNoChecked == true || isYesChecked == true))
             {
                 SubmitBtn.IsEnabled = true;
             }
