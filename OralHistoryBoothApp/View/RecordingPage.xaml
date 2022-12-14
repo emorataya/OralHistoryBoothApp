@@ -55,7 +55,7 @@
                         <CompositeTransform ScaleX="2" ScaleY="2"/>
                     </AppBarButton.RenderTransform>
                 </AppBarButton>
-                <AppBarButton x:Name="cancelBtn" Label="Cancel" Icon="Cancel" Click="CancelBtn_Click" Width="50" Height="55" Margin="40,0,20,0">
+                <AppBarButton x:Name="cancelBtn" Label="Delete" Icon="Delete" Click="CancelBtn_Click" Width="50" Height="55" Margin="40,0,20,0">
                     <AppBarButton.RenderTransform>
                         <CompositeTransform ScaleX="2" ScaleY="2"/>
                     </AppBarButton.RenderTransform>

@@ -46,7 +46,6 @@ namespace OralHistoryBoothApp.Views
         private int time = 0;
 
         private static Random random = new Random();
-
         public static string RandomString(int length)
         {
             const string chars = "0123456789";
@@ -63,7 +62,6 @@ namespace OralHistoryBoothApp.Views
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += timer_Tick;
-            //timer.Start();
             stopBtn.IsEnabled = false;
             playBtn.IsEnabled = false;
             pauseBtn.IsEnabled = false;
@@ -89,11 +87,8 @@ namespace OralHistoryBoothApp.Views
                 resumeBtn.IsEnabled = false;
                 pauseBtn.IsEnabled = false;
                 cancelBtn.IsEnabled = true;
-
             }
-
         }
-
         private async Task<bool> RecordProcess()
         {
             if (buffer != null)
@@ -154,15 +149,12 @@ namespace OralHistoryBoothApp.Views
         }
         public async Task SaveRecordedAudio(CoreDispatcher UiDispatcher)
         {
-
-            
             MediaElement playback = new MediaElement();
             //
             IRandomAccessStream audio = buffer.CloneStream();
 
             if (audio == null)
                 throw new ArgumentNullException("buffer");
-            //Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             if (!string.IsNullOrEmpty(filename))
             {
@@ -185,17 +177,6 @@ namespace OralHistoryBoothApp.Views
                     await audio.FlushAsync();
                     audio.Dispose();
                 }
-
-                //
-                //IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
-                //playback.SetSource(stream, storageFile.FileType);
-
-                ////Prueba de TagLib
-
-                //playback.Play();
-
-
-
             });
         }
 
@@ -225,7 +206,6 @@ namespace OralHistoryBoothApp.Views
             stopBtn.IsEnabled = true;
             pauseBtn.IsEnabled = true;
             cancelBtn.IsEnabled = true;
-
         }
         private async void stopBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -237,12 +217,10 @@ namespace OralHistoryBoothApp.Views
             stopBtn.IsEnabled = false;
             resumeBtn.IsEnabled = false;
             pauseBtn.IsEnabled = false;
-            //SaveAudioToFile();
         }
 
         private async void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
-            //await SaveRecordedAudio(Dispatcher);
             await PlayAudio(Dispatcher);
         }
 
@@ -264,7 +242,6 @@ namespace OralHistoryBoothApp.Views
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            //buffer.Dispose();
             buffer = null;
             recordBtn.IsEnabled = true;
             stopBtn.IsEnabled = false;
@@ -275,10 +252,7 @@ namespace OralHistoryBoothApp.Views
             timer.Stop();
             record = false;
             TimerIndicator.Visibility = Visibility.Collapsed;
-
-            
         }
-
 
         private void addTags()
         {
@@ -294,44 +268,9 @@ namespace OralHistoryBoothApp.Views
             file.Save();
         }
 
-        private async void SaveAudio(CoreDispatcher UiDispatcher)
-        {
-            IRandomAccessStream audio = buffer.CloneStream();
-
-            if (audio == null)
-                throw new ArgumentNullException("buffer");
-            //Windows.Storage.ApplicationData.Current.LocalFolder;
-            StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            if (!string.IsNullOrEmpty(filename))
-            {
-                StorageFile original = await storageFolder.GetFileAsync(filename);
-                await original.DeleteAsync();
-            }
-            await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            {
-                audioFile = RandomString(10);
-                audioFile += ".mp3";
-
-                StorageFile storageFile = await storageFolder.CreateFileAsync(audioFile, CreationCollisionOption.GenerateUniqueName);
-                filename = storageFile.Name;
-
-                fullpath = storageFile.Path;
-
-                using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    await RandomAccessStream.CopyAndCloseAsync(audio.GetInputStreamAt(0), fileStream.GetOutputStreamAt(0));
-                    await audio.FlushAsync();
-                    audio.Dispose();
-                }
-            });
-        }
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-     
-            //SaveAudio(Dispatcher);
             addTags();
-
-
         }
 
         private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -381,23 +320,5 @@ namespace OralHistoryBoothApp.Views
                 SubmitBtn.IsEnabled = true;
             }
         }
-
-
-        //private async void SaveAudioToFile()
-        //{
-        //    IRandomAccessStream audioStream = buffer.CloneStream();
-        //    StorageFolder storageFolder = Package.Current.InstalledLocation;
-        //    StorageFile storageFile = await storageFolder.CreateFileAsync(
-        //      "prueba", CreationCollisionOption.GenerateUniqueName);
-        //    this._fileName = storageFile.Name;
-        //    using (IRandomAccessStream fileStream =
-        //      await storageFile.OpenAsync(FileAccessMode.ReadWrite))
-        //    {
-        //        await RandomAccessStream.CopyAndCloseAsync(
-        //          audioStream.GetInputStreamAt(0), fileStream.GetOutputStreamAt(0));
-        //        await audioStream.FlushAsync();
-        //        audioStream.Dispose();
-        //    }
-        //}
     }
 }
