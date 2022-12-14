@@ -1,5 +1,4 @@
-# Oral History Booth App
-# Project description:
+# Oral History Booth App, project description:
 Professor Kimberly Laing (klaing@harding.edu) from the History Department has commissioned us to create a prototype UWP app for Harding's 100th Anniversary.  The app will run on a Win10 computer with a keyboard, monitor, and mouse.
 
 The project  consist of two different apps: a recording app, and an admin app.
