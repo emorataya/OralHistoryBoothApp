@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+     Background="#FFA08448">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <!--HorizontalAlignment="Center" VerticalAlignment="Center"-->
@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" FontSize="48"  x:Name="TimerIndicator" Width="1602" Margin="-412,-44,0,26" Grid.ColumnSpan="2" Grid.RowSpan="4" HorizontalAlignment="Left" TextAlignment="Center"/>
 
-        <AppBar Grid.Row="2" IsOpen="True" IsSticky="True" Margin="30,0,56,0" Height="113" Grid.ColumnSpan="2" VerticalAlignment="Center">
+        <AppBar  Grid.Row="2" IsOpen="True" IsSticky="True" Margin="30,0,56,0" Height="113" Grid.ColumnSpan="2" VerticalAlignment="Center" Background="#FF000008">
             <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
                 <AppBarButton x:Name="recordBtn" Label="Record" Icon="Microphone" Click="recordBtn_Click" Width="50" Height="55" Margin="40,0,20,0">
                     <AppBarButton.RenderTransform>

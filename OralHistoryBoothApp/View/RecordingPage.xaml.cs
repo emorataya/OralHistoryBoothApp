@@ -138,19 +138,24 @@ namespace OralHistoryBoothApp.Views
           
             return true;
         }
-        public async Task PlayRecordedAudio(CoreDispatcher UiDispatcher)
+
+        public async Task PlayAudio(CoreDispatcher UiDispatcher)
+        {
+            await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                MediaElement playbackMediaElement = new MediaElement();
+                StorageFolder storageFolder2 = Windows.Storage.ApplicationData.Current.LocalFolder;
+                StorageFile storageFile = await storageFolder2.GetFileAsync(filename);
+                IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
+                playbackMediaElement.SetSource(stream, storageFile.FileType);
+                playbackMediaElement.Play();
+            });
+
+        }
+        public async Task SaveRecordedAudio(CoreDispatcher UiDispatcher)
         {
 
-            //await UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            //{
-            //    MediaElement playbackMediaElement = new MediaElement();
-            //    StorageFolder storageFolder2 = Windows.Storage.ApplicationData.Current.LocalFolder;
-            //    StorageFile storageFile = await storageFolder2.GetFileAsync(filename);
-            //    IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
-            //    playbackMediaElement.SetSource(stream, storageFile.FileType);
-            //    playbackMediaElement.Play();
-            //});
-
+            
             MediaElement playback = new MediaElement();
             //
             IRandomAccessStream audio = buffer.CloneStream();
@@ -182,12 +187,12 @@ namespace OralHistoryBoothApp.Views
                 }
 
                 //
-                IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
-                playback.SetSource(stream, storageFile.FileType);
+                //IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
+                //playback.SetSource(stream, storageFile.FileType);
 
-                //Prueba de TagLib
+                ////Prueba de TagLib
 
-                playback.Play();
+                //playback.Play();
 
 
 
@@ -226,6 +231,7 @@ namespace OralHistoryBoothApp.Views
         {
             timer.Stop();
             await capture.StopRecordAsync();
+            await SaveRecordedAudio(Dispatcher);
             record = false;
             playBtn.IsEnabled = true;
             stopBtn.IsEnabled = false;
@@ -236,7 +242,8 @@ namespace OralHistoryBoothApp.Views
 
         private async void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
-            await PlayRecordedAudio(Dispatcher);
+            //await SaveRecordedAudio(Dispatcher);
+            await PlayAudio(Dispatcher);
         }
 
         private async void PauseBtn_Click(object sender, RoutedEventArgs e)
