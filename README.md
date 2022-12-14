@@ -16,3 +16,6 @@ This project was developed using the pair programming technique. Both programmer
 # Percentage of work performed by each teammate:
 
 Karen Carballo: 50% Edwin Morataya: 50%
+
+# Note: 
+To enter the username is: admin and the password is: 1234
