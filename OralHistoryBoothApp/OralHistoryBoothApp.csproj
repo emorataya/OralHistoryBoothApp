@@ -149,6 +149,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\HardingLogo.png" />
+    <Content Include="HardingLogo.png" />
+    <Content Include="harding.jpg" />
     <Content Include="large.jpg" />
     <Content Include="mejorada.jpg" />
     <Content Include="Properties\Default.rd.xml" />

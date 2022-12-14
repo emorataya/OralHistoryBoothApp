@@ -33,6 +33,8 @@ namespace OralHistoryBoothApp.View
             if (TermsCheckBox.IsChecked == false)
             {
                 TermsUncheckedError.Visibility = Visibility.Visible;
+
+                WarningBorder.Visibility = Visibility.Visible;
             }
             else
             {

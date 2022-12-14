@@ -7,26 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Grid>
-        <Image Source="/large.jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"/>
+        <Image Source="/harding.jpg" Stretch="UniformToFill"/>
         <StackPanel>
-            <TextBlock Text="Harding University 100th anniversary" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Bernard MT Condensed" />
-            <TextBlock Text="Oral History Booth" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Bernard MT Condensed" />
-            <TextBlock Text="" FontSize="200"/>
-            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
-                <TextBlock Text="Terms and Conditions"  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left"/>
+            <Border Background="#FFA28448">
+                <TextBlock FontSize="40" TextAlignment="Center" FontFamily="Mongolian Baiti" FontWeight="Bold">
+                    <LineBreak />
+                    <Run>Harding University 100th anniversary </Run>
+                    <LineBreak />
+                    <Run>Oral History Booth </Run>
+                     <LineBreak />
+                </TextBlock>
             </Border>
-            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
-                <TextBlock Text="- I acknowledge that this is a research project from the History Department and they can use this information for their purposes."  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left" />
+            <TextBlock Text="" FontSize="90" Margin="10,0,0,0"/>
+            <Border CornerRadius="10" Background="#B3000008" Width="1150" Height="160" Padding="0,10,0,0">
+                <TextBlock FontSize="20" Margin="10,0,0,0">
+                    <Run Text="Terms and Conditions  " TextDecorations="Underline"/>
+                    <LineBreak />
+                    <LineBreak />
+                    <Run>- I acknowledge that this is a research project from the History Department and they can use this information for their purposes.</Run>
+                    <LineBreak />
+                    <LineBreak />
+                    <Run>- I acknowledge that the content is appropriate and that my information will be uploaded to the Booth.</Run>
+                </TextBlock>
             </Border>
-            <Border Background="DimGray" Width="1150" Height="50" Padding="0,10,0,0">
-                <TextBlock Text="- I acknowledge that the content is appropriate and that my information will be uploaded to the Booth."  FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Left"/>
+            <TextBlock Text="" FontSize="20"/>
+            <Border CornerRadius="10"  Background="#B3000008" HorizontalAlignment="Left" Margin="180,0,0,0">
+                <CheckBox x:Name="TermsCheckBox" Content="I have read and agree to the Terms and Conditions." FontSize="15" HorizontalAlignment="Left" IsChecked="False" VerticalAlignment="Center" Margin="5,0,0,0"/>
             </Border>
-            <TextBlock Text="" FontSize="25"/>
-            <CheckBox x:Name="TermsCheckBox" Content="I have read and agree to the Terms and Conditions." Margin="200,0,0,0" FontSize="15" HorizontalAlignment="Left" IsChecked="False"/>
-            <TextBlock x:Name="TermsUncheckedError" Text="Please agree to the terms above"  FontSize="20" FontFamily="Bernard MT Condensed" Margin="0,0,150,0" HorizontalAlignment="Right" Visibility="Collapsed" Foreground="Yellow"/>
-            <Button HorizontalAlignment="Right" Margin="0,0,100,0" Content="Continue" FontSize="24" Background="Black" Click="Button_Click"/>
+            <Border Name="WarningBorder" Visibility="Collapsed" CornerRadius="10"  Background="#B3000008" HorizontalAlignment="Right" Margin="0,0,50,0" Padding="10,0,10,0">
+                <TextBlock x:Name="TermsUncheckedError" Text="Please agree to the terms and conditions to continue." Visibility="Collapsed" FontSize="20" FontFamily="Bernard MT Condensed" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
+            </Border>
+
+            <Button HorizontalAlignment="Right" Margin="0,0,100,0" Content="Continue" FontSize="24" Background="Black" Click="Button_Click" CornerRadius="10"/>
         </StackPanel>
     </Grid>
 </Page>
