@@ -4,17 +4,29 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.System;
 
 namespace OralHistoryBoothApp.Model
 {
-    internal class Recording
+    public class Recording
     {
         internal Action<object, PropertyChangedEventArgs> PropertyChanged;
 
         public string Name { get; set; }
-        public int Decade { get; set; }
+        public string Decade { get; set; }
         public string Tag { get; set; }
-        public bool Student { get; set; }
+        public string Student { get; set; }
+
     }
+
+    //public class RecordingManager
+    //{
+    //    public static List<Recording> GetRecordings()
+    //    {
+    //            var records = new List<Recording>();
+                
+
+    //    }
+    //}
 }

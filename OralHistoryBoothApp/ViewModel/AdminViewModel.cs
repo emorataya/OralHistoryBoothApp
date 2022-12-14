@@ -27,6 +27,37 @@ namespace OralHistoryBoothApp.ViewModel
                 OnPropertyChanged(this, new PropertyChangedEventArgs("Name"));
             }
         }
+        public string Student
+        {
+            get { return recordingsinfo.Student; }
+            set
+            {
+                recordingsinfo.Student = value;
+                OnPropertyChanged(this, new PropertyChangedEventArgs("Student"));
+            }
+        }
+
+        public string Decade
+        {
+            get { return recordingsinfo.Decade; }
+            set
+            {
+                recordingsinfo.Decade = value;
+                OnPropertyChanged(this, new PropertyChangedEventArgs("decade"));
+            }
+        }
+
+        public string Tag
+        {
+            get { return recordingsinfo.Tag; }
+            set
+            {
+                recordingsinfo.Tag = value;
+                OnPropertyChanged(this, new PropertyChangedEventArgs("Tag"));
+
+            }
+        }
+
         public AdminViewModel()
         {
             this.recordingsinfo = new RecordingsInfo();
@@ -34,14 +65,13 @@ namespace OralHistoryBoothApp.ViewModel
 
             foreach (var admin in recordingsinfo.recordings)
             {
-                var newMovie = new RecordingViewModel { Name = admin.Name };
-                newMovie.PropertyChanged += OnPropertyChanged;
-                AdminInfo.Add(newMovie);
+                var newAdmin = new RecordingViewModel { Name = admin.Name, Decade = admin.Decade, Student = admin.Student, Tag = admin.Tag};
+                newAdmin.PropertyChanged += OnPropertyChanged;
+                AdminInfo.Add(newAdmin);
             }
         }
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // Theater name or MovieViewModel changed, so let UI know
             PropertyChanged?.Invoke(sender, e);
         }
 

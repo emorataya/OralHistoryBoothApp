@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media.Animation;
 using TagLib.Ogg;
 using Frame = Windows.UI.Xaml.Controls.Frame;
 using Page = Windows.UI.Xaml.Controls.Page;
+using OralHistoryBoothApp.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -39,7 +40,7 @@ namespace OralHistoryBoothApp.Views
         bool stopAudioClick = false;
         //timer
         private DispatcherTimer timer;
-        private int time = 0;
+        private int time = 0; 
 
         private static Random random = new Random();
         public static string RandomString(int length)
@@ -265,7 +266,7 @@ namespace OralHistoryBoothApp.Views
             string DecadeSelected = Decades.SelectedItem.ToString();
             file.Tag.Album = DecadeSelected;
             string StorySelected = StoryTags.SelectedItem.ToString();
-            file.Tag.Copyright = StorySelected;
+            //file.Tag.Title = StorySelected;
             file.Save();
         }
 

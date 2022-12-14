@@ -6,15 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#FFA08448">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ListView x:Name="MP3ListView" SelectionChanged="MP3ListView_SelectionChanged" />
-            <Button Name="DeleteSelectedBtn" Click="DeleteSelectedBtn_Click"> Delete </Button>
-            <Button Name="PlayBtn" HorizontalAlignment="Center" Click="PlayBtn_Click">Play</Button>
-            <TextBlock FontSize="60" Name="DisplayTagsText"> </TextBlock>
+            <TextBlock FontSize="60" Name="DisplayTagsText"></TextBlock>
+            <Button Name="DeleteSelectedBtn" Background="#FF000008" HorizontalAlignment="Center" Margin="0,5,0,0" Click="DeleteSelectedBtn_Click" Width="64"> Delete </Button>
+            <Button Name="PlayBtn"  Background="#FF000008" HorizontalAlignment="Center" Margin="0,5,0,0" Click="PlayBtn_Click" Width="64">Play</Button>
+            <Button Name="LogoutBtn" Background="#FF000008" HorizontalAlignment="Center" Margin="0,5,0,0" Click="LogoutBtn_Click">Logout</Button>
 
         </StackPanel>
+
+     
+
     </Grid>
 </Page>

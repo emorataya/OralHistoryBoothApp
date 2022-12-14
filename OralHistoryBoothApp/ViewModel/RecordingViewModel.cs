@@ -26,6 +26,35 @@ namespace OralHistoryBoothApp.Model
             }
         }
 
+        public string Student
+        {
+            get { return recording.Student; }
+            set
+            {
+                recording.Student = value;
+                OnPropertyChanged("Student");
+            }
+        }
+
+        public string Decade
+        {
+            get { return recording.Decade; }
+            set
+            {
+                recording.Decade = value;
+                OnPropertyChanged("decade");
+            }
+        }
+
+        public string Tag
+        {
+            get { return recording.Tag; }
+            set
+            {
+                recording.Tag = value;
+                OnPropertyChanged("Tag");
+            }
+        }
         private void OnPropertyChanged(string property)
         {
             // Notify any controls bound to the ViewModel that the property changed
